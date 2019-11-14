@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springboot.ali.mapper.RetentionMapper">
+
+    <select id="getRetentionList" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.retentionRate">
+        select * from retention_rate
+        where 1=1
+        <if test="begdate != null">
+            and watchTime <![CDATA[ >= ]]>  #{begdate}
+        </if>
+        <if test="enddate != null">
+            and watchTime <![CDATA[ <= ]]>  #{enddate}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springboot.ali.mapper.TopPopMapper">
+
+    <select id="getPopList" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.topPopIndex">
+        select * from topPopFood
+        where 1=1 and city_name in ( 1=1
+        <if test="cityNameone != null">
+            ,#{cityNameone}
+        </if>
+        <if test="cityNametwo != null">
+            ,#{cityNametwo}
+        </if>
+        <if test="cityNamethree != null">
+            ,#{cityNamethree}
+        </if>
+        <if test="cityNamefour != null">
+            ,#{cityNamefour}
+        </if>
+        )
+        <if test="foodName != null">
+            and foodname=#{foodName}
+        </if>
+    </select>
+</mapper>
