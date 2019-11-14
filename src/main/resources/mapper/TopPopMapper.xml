@@ -4,20 +4,20 @@
 
     <select id="getPopList" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.topPopIndex">
         select * from topPopFood
-        where 1=1 and city_name in ( 1=1
+        where 1=1
         <if test="cityNameone != null">
-            ,#{cityNameone}
+            and city_name = #{cityNameone}
         </if>
         <if test="cityNametwo != null">
-            ,#{cityNametwo}
+            and city_name = #{cityNametwo}
         </if>
         <if test="cityNamethree != null">
-            ,#{cityNamethree}
+            and city_name = #{cityNamethree}
         </if>
         <if test="cityNamefour != null">
-            ,#{cityNamefour}
+            and city_name = #{cityNamefour}
         </if>
-        )
+
         <if test="foodName != null">
             and foodname=#{foodName}
         </if>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springboot.ali.mapper.TopShopMapper">
+
+    <select id="getTopShops" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.topshop">
+        select * from  topshop
+        where 1=1
+        <if test="shopid != 0">
+            and shopid = #{shopid}
+        </if>
+        <if test="cityname != null">
+            and cityname = #{cityname}
+        </if>
+        <if test="foodname != null">
+            and foodname like #{foodname}
+        </if>
+    </select>
+</mapper>

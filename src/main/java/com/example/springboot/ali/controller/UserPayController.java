@@ -1,10 +1,7 @@
 package com.example.springboot.ali.controller;
 
 import com.example.springboot.ali.entity.*;
-import com.example.springboot.ali.service.RetentionService;
-import com.example.springboot.ali.service.TopAvgpayService;
-import com.example.springboot.ali.service.TopPopService;
-import com.example.springboot.ali.service.ViewService;
+import com.example.springboot.ali.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -29,6 +26,8 @@ public class UserPayController {
     RetentionService retentionService;
     @Autowired
     ViewService viewService;
+    @Autowired
+    TopShopService topShopService;
 
     @RequestMapping(value = "/job2")
     public ModelAndView getPaylist(@Valid orderPop pop, BindingResult result){
@@ -172,21 +171,49 @@ public class UserPayController {
                 List<DayviewCount> viewCountList = viewService.getViewList(map,timeDim);
                 modelAndView.addObject("viewCountList",viewCountList );
             }
-
             System.out.println("map params:"+map.toString());
-
-//            viewCountList.iterator().forEachRemaining(new Consumer<DayviewCount>() {
-//                @Override
-//                public void accept(DayviewCount v) {
-//                    System.out.println(v.toString());
-//                }
-//            });
-
-
-
         }
 
         modelAndView.setViewName("pay/job3.2");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/job3.3")
+    public ModelAndView getTopShopView(@Valid orderShop order, BindingResult result){
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("pay/job3.3");
+
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/TopShopView.action")
+    public ModelAndView TopShopindex(@Valid orderShop order,BindingResult result) throws ParseException {
+
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println(order.toString());
+
+        if(result.hasErrors()){
+            modelAndView.addObject("hintMessage","出错啦！");
+        }else{
+            Map<String, Object> map = new HashMap<>();
+            if(order.getShopid() != 0){
+                map.put("shopid",order.getShopid());
+            }
+            if(order.getCityname()!=null){
+                map.put("cityname",order.getCityname());
+            }
+            if(order.getFoodname()!=null){
+                map.put("foodname",order.getFoodname());
+            }
+            List<topshop> viewCountList = topShopService.getTopShopViewList(map);
+            modelAndView.addObject("viewCountList",viewCountList );
+            System.out.println("map params:"+map.toString());
+        }
+
+        modelAndView.setViewName("pay/job3.3");
 
         return modelAndView;
     }
