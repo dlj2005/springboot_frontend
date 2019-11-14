@@ -15,8 +15,8 @@ public class orderRetention {
      * enddate : 2
      */
 
-    private Date begdate;
-    private Date enddate;
+    private String begdate;
+    private String enddate;
 
 
     @Override
@@ -27,19 +27,19 @@ public class orderRetention {
                 '}';
     }
 
-    public Date getBegdate() {
+    public String getBegdate() {
         return begdate;
     }
 
-    public void setBegdate(Date begdate) {
+    public void setBegdate(String begdate) {
         this.begdate = begdate;
     }
 
-    public Date getEnddate() {
+    public String getEnddate() {
         return enddate;
     }
 
-    public void setEnddate(Date enddate) {
+    public void setEnddate(String enddate) {
         this.enddate = enddate;
     }
 }

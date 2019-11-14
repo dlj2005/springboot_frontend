@@ -4,6 +4,7 @@ import com.example.springboot.ali.entity.*;
 import com.example.springboot.ali.service.RetentionService;
 import com.example.springboot.ali.service.TopAvgpayService;
 import com.example.springboot.ali.service.TopPopService;
+import com.example.springboot.ali.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,10 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.util.*;
 import java.util.function.Consumer;
 
 
@@ -28,6 +27,8 @@ public class UserPayController {
     private TopPopService topPopService;
     @Autowired
     RetentionService retentionService;
+    @Autowired
+    ViewService viewService;
 
     @RequestMapping(value = "/job2")
     public ModelAndView getPaylist(@Valid orderPop pop, BindingResult result){
@@ -101,18 +102,18 @@ public class UserPayController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/job3")
+    @RequestMapping(value = "/job3.1")
     public ModelAndView getPaylist(@Valid orderRetention order, BindingResult result){
 
         ModelAndView modelAndView = new ModelAndView();
 
-        modelAndView.setViewName("pay/job3");
+        modelAndView.setViewName("pay/job3.1");
 
         return modelAndView;
     }
 
     @PostMapping(value = "/search.action")
-    public ModelAndView retentionindex(@Valid orderRetention order, BindingResult result){
+    public ModelAndView retentionindex(@Valid orderRetention order, BindingResult result) throws ParseException {
 
         ModelAndView modelAndView = new ModelAndView();
 
@@ -135,15 +136,59 @@ public class UserPayController {
                     System.out.println(r.toString());
                 }
             });
-
             modelAndView.addObject("retentionList", retentionList);
         }
 
-        modelAndView.setViewName("pay/job3");
+        modelAndView.setViewName("pay/job3.1");
 
         return modelAndView;
     }
 
+    @RequestMapping(value = "/job3.2")
+    public ModelAndView getViewList(@Valid orderView order, BindingResult result){
 
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("pay/job3.2");
+
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/searchView.action")
+    public ModelAndView viewindex(@Valid orderView order,BindingResult result) throws ParseException {
+
+        ModelAndView modelAndView = new ModelAndView();
+
+
+        if(result.hasErrors()){
+            modelAndView.addObject("hintMessage","出错啦！");
+        }else{
+            Map<String, Object> map = new HashMap<>();
+            if(order.getShopid() != 0){
+                map.put("shopid",order.getShopid());
+            }
+            String timeDim = order.getTimeDimention();
+            if(timeDim!=null){
+                List<DayviewCount> viewCountList = viewService.getViewList(map,timeDim);
+                modelAndView.addObject("viewCountList",viewCountList );
+            }
+
+            System.out.println("map params:"+map.toString());
+
+//            viewCountList.iterator().forEachRemaining(new Consumer<DayviewCount>() {
+//                @Override
+//                public void accept(DayviewCount v) {
+//                    System.out.println(v.toString());
+//                }
+//            });
+
+
+
+        }
+
+        modelAndView.setViewName("pay/job3.2");
+
+        return modelAndView;
+    }
 
 }

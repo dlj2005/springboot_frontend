@@ -11,46 +11,46 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class retentionRate {
     /**
-     * shop_id : 1
+     * shopId : 1
      * watchTime : 1
      * watchUsers : 1
-     * retention_rate : 1
+     * retentionRate : 1
      */
 
-    private int shop_id;
-    private Date watchTime;
+    private int shopId;
+    private String watchTime;
     private int watchUsers;
-    private String retention_rate;
+    private String retentionRate;
 
-//    shop_id | watchTime  | watchUsers | retention_rate |
+//    shopId | watchTime  | watchUsers | retentionRate |
 //            +---------+------------+------------+----------------+
 //            |      44 | 2016-10-01 |          2 | 100.0%
 
 
     @Override
     public String toString() {
-        return "topAvgPay{" +
-                ", shop_id='" + shop_id +
-                ", watchTime='" + watchTime +
-                ", watchUsers='" + watchUsers +
-                ", retention_rate=" + retention_rate +
+        return "retentionRate{" +
+                " shopId=" + shopId +
+                ", watchTime=" + watchTime +
+                ", watchUsers=" + watchUsers +
+                ", retentionRate=" + retentionRate +
                 '}';
     }
 
 
-    public int getShop_id() {
-        return shop_id;
+    public int getShopId() {
+        return shopId;
     }
 
-    public void setShop_id(int shop_id) {
-        this.shop_id = shop_id;
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
     }
 
-    public Date getWatchTime() {
+    public String getWatchTime() {
         return watchTime;
     }
 
-    public void setWatchTime(Date watchTime) {
+    public void setWatchTime(String watchTime) {
         this.watchTime = watchTime;
     }
 
@@ -62,11 +62,11 @@ public class retentionRate {
         this.watchUsers = watchUsers;
     }
 
-    public String getRetention_rate() {
-        return retention_rate;
+    public String getRetentionRate() {
+        return retentionRate;
     }
 
-    public void setRetention_rate(String retention_rate) {
-        this.retention_rate = retention_rate;
+    public void setRetentionRate(String retentionRate) {
+        this.retentionRate = retentionRate;
     }
 }

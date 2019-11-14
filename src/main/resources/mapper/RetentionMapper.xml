@@ -3,13 +3,15 @@
 <mapper namespace="com.example.springboot.ali.mapper.RetentionMapper">
 
     <select id="getRetentionList" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.retentionRate">
-        select * from retention_rate
+        select * from retentionRate
         where 1=1
-        <if test="begdate != null">
-            and watchTime <![CDATA[ >= ]]>  #{begdate}
-        </if>
-        <if test="enddate != null">
-            and watchTime <![CDATA[ <= ]]>  #{enddate}
-        </if>
+        <!--<if test="begdate != null">-->
+        <!--&lt;!&ndash;and watchTime = #{begdate}&ndash;&gt;-->
+            <!--and watchTime <![CDATA[ >= ]]>  #{begdate}-->
+<!--&#45;&#45;             and watchTime = #{begdate}-->
+        <!--</if>-->
+        <!--<if test="enddate != null">-->
+            <!--and watchTime <![CDATA[ <= ]]>  #{enddate}-->
+        <!--</if>-->
     </select>
 </mapper>

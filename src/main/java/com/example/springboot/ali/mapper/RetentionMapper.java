@@ -1,5 +1,4 @@
 package com.example.springboot.ali.mapper;
-import com.example.springboot.ali.entity.orderRetention;
 import com.example.springboot.ali.entity.retentionRate;
 import org.springframework.stereotype.Repository;
 

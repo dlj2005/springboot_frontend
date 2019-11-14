@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springboot.ali.mapper.ViewMapper">
+
+    <select id="getDayViewList" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.DayviewCount">
+        select shop_id as shopid,viewCounts,day from day_view
+        where 1=1
+        <if test="shopid != null">
+            and shop_id =  #{shopid}
+        </if>
+        group by day
+        order  by  day
+    </select>
+
+    <select id="getWeekViewList" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.DayviewCount">
+        select shop_id as shopid,viewCounts,day from week_view
+        where 1=1
+        <if test="shopid != null">
+            and shop_id =  #{shopid}
+        </if>
+        group by day
+        order  by  day
+    </select>
+
+    <select id="getMonthViewList" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.DayviewCount">
+        select shop_id as shopid,viewCounts,day from month_view
+        where 1=1
+        <if test="shopid != null">
+            and shop_id =  #{shopid}
+        </if>
+        group by day
+        order  by  day
+    </select>
+</mapper>
