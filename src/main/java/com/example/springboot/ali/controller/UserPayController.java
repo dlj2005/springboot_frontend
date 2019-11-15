@@ -4,9 +4,12 @@ import com.example.springboot.ali.entity.*;
 import com.example.springboot.ali.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.text.ParseException;
@@ -52,6 +55,18 @@ public class UserPayController {
         modelAndView.setViewName("pay/job1");
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/echartjob1.action")
+    @ResponseBody
+    public List<topAvgPay> getJob1Entity() {
+        return topAvgpayService.getPayList();
+    }
+
+    @GetMapping(value = "/templates/echart/job1.do")
+    public String echarts4(Model model){
+        System.err.println("========开始");
+        return "Echars";
     }
 
 
@@ -217,5 +232,7 @@ public class UserPayController {
 
         return modelAndView;
     }
+
+
 
 }

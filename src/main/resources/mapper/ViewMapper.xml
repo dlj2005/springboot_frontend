@@ -3,30 +3,30 @@
 <mapper namespace="com.example.springboot.ali.mapper.ViewMapper">
 
     <select id="getDayViewList" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.DayviewCount">
-        select shopid as shopid,viewCounts,day from day_view
+        select shop_id as shopid ,viewCounts,day from day_view
         where 1=1
         <if test="shopid != null">
-            and shopid =  #{shopid}
+            and shop_id =  #{shopid}
         </if>
         group by day
         order  by  day
     </select>
 
     <select id="getWeekViewList" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.DayviewCount">
-        select shopid as shopid,viewCounts,day from week_view
+        select shop_id as shopid,viewCounts,day from week_view
         where 1=1
         <if test="shopid != null">
-            and shopid =  #{shopid}
+            and shop_id =  #{shopid}
         </if>
         group by day
         order  by  day
     </select>
 
     <select id="getMonthViewList" parameterType="java.util.HashMap" resultType="com.example.springboot.ali.entity.DayviewCount">
-        select shopid as shopid,viewCounts,day from month_view
+        select shop_id as shopid,viewCounts,day from month_view
         where 1=1
         <if test="shopid != null">
-            and shopid =  #{shopid}
+            and shop_id =  #{shopid}
         </if>
         group by day
         order  by  day
